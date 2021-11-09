@@ -1,10 +1,3 @@
-<script setup lang="ts">
-import { defineComponent } from 'vue'
-import Nav from './Nav.vue'
-import { ref } from 'vue'
-
-</script>
-
 <template>
 <div class="container mx-auto">
     <div class="bg-green-100" style="height:600px;">
@@ -104,3 +97,37 @@ import { ref } from 'vue'
 <style scoped>
 
 </style>
+
+<script lang="ts">
+// import { defineComponent } from 'vue'
+import Nav from './Nav.vue'
+import { ref, onMounted } from 'vue'
+
+export default {
+    components:{
+        Nav,
+    },
+    setup(){
+        const Alldata = ref([])
+
+        function fetchAllData() {
+            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot')
+                .then(res => res.json())
+                .then(data => {
+                    console.log({data})
+                    Alldata.value = data
+                    console.log(Alldata.value)
+                })
+        } 
+        onMounted(() => {
+            fetchAllData();
+        })
+
+        return {
+            Alldata,
+        }
+    }
+}
+
+
+</script>
