@@ -17,121 +17,149 @@
         </div>
         
     </div>
-    <div>
-        <h1 class="font-mono text-4xl font-bold mt-8">旅遊景點</h1>
-        <div class="flex flex-col md:flex-row md:justify-between">
-            <div class="my-5 mx-auto w-8/12 md:w-4/12">
-                <div class="bg-black flex justify-center items-center w-8/12 mx-auto">
-                    <p class="font-mono text-white text-4xl font-bold top-0 left-0 right-0 bottom-0 mt-5">101</p>
+    <div class="home" v-if="selectType == ''">
+        <div>
+            <h1 class="font-mono text-4xl font-bold mt-8">旅遊景點</h1>
+            <div class="flex flex-col md:flex-row md:justify-between">
+                <div class="my-5 mx-auto w-8/12 md:w-4/12">
+                    <div class="bg-black flex justify-center items-center w-8/12 mx-auto">
+                        <p class="font-mono text-white text-4xl font-bold top-0 left-0 right-0 bottom-0 mt-5">101</p>
+                    </div>
                 </div>
-            </div>
-            <div class="my-5 mx-auto w-8/12 md:w-4/12">
-                <div class="bg-black flex justify-center items-center w-8/12 mx-auto">
-                    <p class="font-mono text-white text-4xl font-bold top-0 left-0 right-0 bottom-0 mt-5">101</p>
+                <div class="my-5 mx-auto w-8/12 md:w-4/12">
+                    <div class="bg-black flex justify-center items-center w-8/12 mx-auto">
+                        <p class="font-mono text-white text-4xl font-bold top-0 left-0 right-0 bottom-0 mt-5">101</p>
+                    </div>
                 </div>
-            </div>
-            <div class="my-5 mx-auto w-8/12 md:w-4/12">
-                <div class="bg-black flex justify-center items-center w-8/12 mx-auto">
-                    <p class="font-mono text-white text-4xl font-bold top-0 left-0 right-0 bottom-0 mt-5">101</p>
+                <div class="my-5 mx-auto w-8/12 md:w-4/12">
+                    <div class="bg-black flex justify-center items-center w-8/12 mx-auto">
+                        <p class="font-mono text-white text-4xl font-bold top-0 left-0 right-0 bottom-0 mt-5">101</p>
+                    </div>
                 </div>
+                
             </div>
-            
+        </div>
+        <div>
+            <div class="relative">
+                <h1 class="font-mono text-4xl font-bold mt-8">觀光活動</h1>
+                <button class="bg-yellow-500 text-white py-1 px-3 rounded-full absolute top-0 right-10 text-2xl hidden md:block">查看更多</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="p-10" v-for="item in showSpot.slice(0,3)" :key="item.ID">
+                    <div class="rounded overflow-hidden shadow-lg">
+                        <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
+                        <div class="px-6 py-4 text-left">
+                            <div class="font-bold text-xl mb-2">{{item.Name}}</div>
+                            <p class="text-gray-700 text-base">
+                                <i class="fas fa-map-marker-alt"></i>
+                                {{ item.Address }}
+                            </p>
+                            <p class="text-gray-700 text-base">
+                                <i class="fas fa-clock"></i>
+                                {{ item.OpenTime }}
+                            </p>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="bg-yellow-500 text-white py-1 px-3 rounded-full text-1xl md:hidden w-3/12 m-auto">查看更多</button>
+            </div>
+        </div>
+        <div>
+            <div class="relative">
+                <h1 class="font-mono text-4xl font-bold mt-8">美食品嘗</h1>
+                <button class="bg-yellow-500 text-white py-1 px-3 rounded-full absolute top-0 right-10 text-2xl hidden md:block">查看更多</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="p-10" v-for="item in showFood.slice(0,3)" :key="item.ID">
+                    <div class="rounded overflow-hidden shadow-lg">
+                        <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
+                        <div class="px-6 py-4 text-left">
+                            <div class="font-bold text-xl mb-2">{{item.Name}}</div>
+                            <p class="text-gray-700 text-base">
+                                <i class="fas fa-map-marker-alt"></i>
+                                {{ item.Address }}
+                            </p>
+                            <p class="text-gray-700 text-base">
+                                <i class="fas fa-clock"></i>
+                                {{ item.OpenTime }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <button class="bg-yellow-500 text-white py-1 px-3 rounded-full text-1xl md:hidden w-3/12 m-auto">查看更多</button>
+            </div>
+        </div>
+        <div>
+            <div class="relative">
+                <h1 class="font-mono text-4xl font-bold mt-8">住宿推薦</h1>
+                <button class="bg-yellow-500 text-white py-1 px-3 rounded-full absolute top-0 right-10 text-2xl hidden md:block">查看更多</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="p-10" v-for="item in showHotel.slice(0,3)" :key="item.ID">
+                    <div class="rounded overflow-hidden shadow-lg">
+                        <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
+                        <div class="px-6 py-4 text-left">
+                            <div class="font-bold text-xl mb-2">{{item.Name}}</div>
+                            <p class="text-gray-700 text-base">
+                                <i class="fas fa-map-marker-alt"></i>
+                                {{ item.Address }}
+                            </p>
+                            <p class="text-gray-700 text-base">
+                                <i class="fas fa-clock"></i>
+                                {{ item.OpenTime }}
+                            </p>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="bg-yellow-500 text-white py-1 px-3 rounded-full text-1xl md:hidden m-auto w-3/12">查看更多</button>
+            </div>
         </div>
     </div>
-    <div>
+    <div class="spot" v-else-if="selectType == '旅遊景點'">
         <div class="relative">
-            <h1 class="font-mono text-4xl font-bold mt-8">觀光活動</h1>
-            <button class="bg-yellow-500 text-white py-1 px-3 rounded-full absolute top-0 right-10 text-2xl hidden md:block">查看更多</button>
-        </div>
-
-
-        <div class="grid grid-cols-1 md:grid-cols-3">
-            <div class="p-10" v-for="item in showSpot.slice(0,3)" :key="item.ID">
-                <div class="rounded overflow-hidden shadow-lg">
-                    <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
-                    <div class="px-6 py-4 text-left">
-                        <div class="font-bold text-xl mb-2">{{item.Name}}</div>
-                        <p class="text-gray-700 text-base">
-                            <i class="fas fa-map-marker-alt"></i>
-                            {{ item.Address }}
-                        </p>
-                        <p class="text-gray-700 text-base">
-                            <i class="fas fa-clock"></i>
-                            {{ item.OpenTime }}
-                        </p>
-                    </div>
-                    <div class="px-6 pt-4 pb-2">
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                    </div>
+                <h1 class="font-mono text-4xl font-bold mt-8 mb-4">{{ showCountry }}</h1>
+                <div class="absolute top-0 right-10 flex flex-row">
+                    <button class="border border-yellow-500 hover:bg-yellow-500 hover:text-white text-yellow-500 py-1 px-3 rounded-full text-2xl md:block hidden mx-2">全部</button>
+                    <button class="border border-yellow-500 hover:bg-yellow-500 hover:text-white text-yellow-500 py-1 px-3 rounded-full text-2xl md:block hidden mx-2">熱門</button>
+                    <button class="border border-yellow-500 hover:bg-yellow-500 hover:text-white text-yellow-500 py-1 px-3 rounded-full text-2xl md:block hidden mx-2">推薦</button>
                 </div>
             </div>
-            <button class="bg-yellow-500 text-white py-1 px-3 rounded-full text-1xl md:hidden w-3/12 m-auto">查看更多</button>
-        </div>
-    </div>
-    <div>
-        <div class="relative">
-            <h1 class="font-mono text-4xl font-bold mt-8">美食品嘗</h1>
-            <button class="bg-yellow-500 text-white py-1 px-3 rounded-full absolute top-0 right-10 text-2xl hidden md:block">查看更多</button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3">
-            <div class="p-10" v-for="item in showSpot.slice(0,3)" :key="item.ID">
-                <div class="rounded overflow-hidden shadow-lg">
-                    <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
-                    <div class="px-6 py-4 text-left">
-                        <div class="font-bold text-xl mb-2">{{item.Name}}</div>
-                        <p class="text-gray-700 text-base">
-                            <i class="fas fa-map-marker-alt"></i>
-                            {{ item.Address }}
-                        </p>
-                        <p class="text-gray-700 text-base">
-                            <i class="fas fa-clock"></i>
-                            {{ item.OpenTime }}
-                        </p>
-                    </div>
-                    <div class="px-6 pt-4 pb-2">
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="p-5" v-for="item in showSpot" :key="item.ID">
+                    <router-link :to="`/content/${item.ID}`">
+                        <div class="rounded overflow-hidden shadow-lg">
+                            <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
+                            <div class="px-6 py-4 text-left">
+                                <div class="font-bold text-xl mb-2">{{item.Name}}</div>
+                                <p class="text-gray-700 text-base">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ item.Address }}
+                                </p>
+                                <p class="text-gray-700 text-base">
+                                    <i class="fas fa-clock"></i>
+                                    {{ item.OpenTime }}
+                                </p>
+                            </div>
+                        </div>
+                    </router-link>
                 </div>
+                <button class="bg-yellow-500 text-white py-1 px-3 rounded-full text-1xl md:hidden w-3/12 m-auto">查看更多</button>
             </div>
-            <button class="bg-yellow-500 text-white py-1 px-3 rounded-full text-1xl md:hidden w-3/12 m-auto">查看更多</button>
-        </div>
     </div>
-    <div>
-        <div class="relative">
-            <h1 class="font-mono text-4xl font-bold mt-8">住宿推薦</h1>
-            <button class="bg-yellow-500 text-white py-1 px-3 rounded-full absolute top-0 right-10 text-2xl hidden md:block">查看更多</button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3">
-            <div class="p-10" v-for="item in showSpot.slice(0,3)" :key="item.ID">
-                <div class="rounded overflow-hidden shadow-lg">
-                    <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
-                    <div class="px-6 py-4 text-left">
-                        <div class="font-bold text-xl mb-2">{{item.Name}}</div>
-                        <p class="text-gray-700 text-base">
-                            <i class="fas fa-map-marker-alt"></i>
-                            {{ item.Address }}
-                        </p>
-                        <p class="text-gray-700 text-base">
-                            <i class="fas fa-clock"></i>
-                            {{ item.OpenTime }}
-                        </p>
-                    </div>
-                    <div class="px-6 pt-4 pb-2">
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                    </div>
-                </div>
-            </div>
-            <button class="bg-yellow-500 text-white py-1 px-3 rounded-full text-1xl md:hidden m-auto w-3/12">查看更多</button>
-        </div>
-    </div>
+    <div v-else>123</div>
+    
 </div>
 </template>
 
@@ -143,12 +171,24 @@
 // import { defineComponent } from 'vue'
 import Nav from './Nav.vue'
 import { ref, onMounted, watch } from 'vue'
+import store from '../store'
+import { useStore } from 'vuex'
 
 export default {
     components:{
         Nav,
     },
     setup(){
+        interface thing {
+            ID:string,
+            Name:string,
+            Picture:any,
+            Address:string,
+            OpenTime: string
+        }
+
+        const store = useStore()
+
         const allCountry = ref([{
                 name: "臺北市",
                 value: "Taipei"
@@ -241,10 +281,17 @@ export default {
             "觀光活動",
             "美食品嘗",
             "住宿推薦"])
-        const allSpot = ref([])
-        const oneSpot = ref([])
+        const allSpot = ref<thing[]>([])
+        const oneSpot = ref<thing[]>([])
         const showSpot = ref(allSpot.value)
-
+        const allFood = ref<thing[]>([])
+        const oneFood = ref<thing[]>([])
+        const showFood = ref(allFood.value)
+        const allHotel = ref<thing[]>([])
+        const oneHotel = ref<thing[]>([])
+        const showHotel = ref(allHotel.value)
+        const showCountry = ref("全部")
+    
         const selectCountry = ref("")
         const selectType = ref("")
 
@@ -254,10 +301,13 @@ export default {
             fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot')
                 .then(res => res.json())
                 .then(data => {
-                    // console.log({data})
                     allSpot.value = data
                     showSpot.value = allSpot.value
-                    console.log(showSpot.value)
+                    for (let i = 0; i < showSpot.value.length; i++) {
+                        if (JSON.stringify(showSpot.value[i].Picture) === '{}') {
+                            showSpot.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                        }
+                    }
                 })
         }
         //指定地點觀光景點
@@ -265,16 +315,88 @@ export default {
             fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}`)
                 .then(res => res.json())
                 .then(data => {
-                    // console.log({data})
                     oneSpot.value = data
                     showSpot.value = oneSpot.value
+                    for (let i = 0; i < showSpot.value.length; i++) {
+                        if (JSON.stringify(showSpot.value[i].Picture) === '{}') {
+                            showSpot.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                        }
+                    }
                 })
         }
 
+        //所有觀光餐飲資料
+        function fetchAllFood() {
+            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant')
+                .then(res => res.json())
+                .then(data => {
+                    allFood.value = data
+                    showFood.value = allFood.value
+                    for (let i = 0; i < showFood.value.length; i++) {
+                        if (JSON.stringify(showFood.value[i].Picture) === '{}') {
+                            showFood.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                        }
+                    }
+                })
+        }
+        //指定地點餐飲景點
+        function fetchOneFood(selectCountry:string) {
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${selectCountry}`)
+                .then(res => res.json())
+                .then(data => {
+                    oneFood.value = data
+                    showFood.value = oneFood.value
+                    for (let i = 0; i < showFood.value.length; i++) {
+                        if (JSON.stringify(showFood.value[i].Picture) === '{}') {
+                            showFood.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                        }
+                    }
+                })
+        }
+
+        //所有觀光住宿資料
+        function fetchAllHotel() {
+            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel')
+                .then(res => res.json())
+                .then(data => {
+                    allHotel.value = data
+                    showHotel.value = allHotel.value
+                    for (let i = 0; i < showHotel.value.length; i++) {
+                        if (JSON.stringify(showHotel.value[i].Picture) === '{}') {
+                            showHotel.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                        }
+                    }
+                })
+        }
+        //指定地點住宿景點
+        function fetchOneHotel(selectCountry:string) {
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${selectCountry}`)
+                .then(res => res.json())
+                .then(data => {
+                    oneHotel.value = data
+                    showHotel.value = oneHotel.value
+                    for (let i = 0; i < showHotel.value.length; i++) {
+                        if (JSON.stringify(showHotel.value[i].Picture) === '{}') {
+                            showHotel.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                        }
+                    }
+                })
+        }
+
+        watch(selectCountry, (newVal, oldVal) => {
+            allCountry.value.filter(item => {
+                if (selectCountry.value == item.value) {
+                    showCountry.value = item.name;
+                    store.dispatch("SELECTTYPE", selectCountry.value)
+                }
+            })
+        })
 
 
         onMounted(() => {
             fetchAllSpot();
+            fetchAllFood();
+            fetchAllHotel();
         })
 
 
@@ -287,7 +409,16 @@ export default {
             selectCountry,
             selectType,
             showSpot,
-            fetchOneSpot
+            allFood,
+            oneFood,
+            showFood,
+            allHotel,
+            oneHotel,
+            showHotel,
+            showCountry,
+            fetchOneSpot,
+            fetchOneFood,
+            fetchOneHotel
         }
     }
 }
