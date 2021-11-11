@@ -387,9 +387,14 @@ export default {
             allCountry.value.filter(item => {
                 if (selectCountry.value == item.value) {
                     showCountry.value = item.name;
-                    store.dispatch("SELECTTYPE", selectCountry.value)
+                    store.dispatch("selectcountry", selectCountry.value)
+                    console.log(store.state.selectType)
                 }
             })
+        })
+        watch(selectType, (newVal, oldVal) => {
+            store.dispatch("selecttype", selectType.value)
+            console.log(store.state.selectType)
         })
 
 

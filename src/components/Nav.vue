@@ -3,7 +3,7 @@
         <nav class="md:flex md:justify-between">
             <div class="flex justify-between">
                 <a href="#">logo</a>
-                <p id="hamburgerbtn" class="md:hidden bg-yellow-100" @click="toggleMenu">menu</p>
+                <p id="hamburgerbtn" class="md:hidden" @click="toggleMenu"><i class="fas fa-bars text-2xl"></i></p>
             </div>
             <ul class="hidden md:flex md:flex-row" id="mobileMenu">
                 <li class="pr-5"><a href="#">旅遊景點</a></li>
