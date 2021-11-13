@@ -290,6 +290,9 @@ export default {
         const allHotel = ref<thing[]>([])
         const oneHotel = ref<thing[]>([])
         const showHotel = ref(allHotel.value)
+        const allActivity = ref<thing[]>([])
+        const oneActivity = ref<thing[]>([])
+        const showActivity = ref(allActivity.value)
         const showCountry = ref("全部")
     
         const selectCountry = ref("")
@@ -301,13 +304,14 @@ export default {
             fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot')
                 .then(res => res.json())
                 .then(data => {
-                    allSpot.value = data
-                    showSpot.value = allSpot.value
-                    for (let i = 0; i < showSpot.value.length; i++) {
-                        if (JSON.stringify(showSpot.value[i].Picture) === '{}') {
-                            showSpot.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                    for (let i = 0; i < data.length; i++) {
+                        if (JSON.stringify(data[i].Picture) === '{}') {
+                            data[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
                         }
                     }
+                    allSpot.value = data
+                    showSpot.value = allSpot.value
+                    store.dispatch('saveallspot', allSpot.value)
                 })
         }
         //指定地點觀光景點
@@ -315,13 +319,13 @@ export default {
             fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}`)
                 .then(res => res.json())
                 .then(data => {
-                    oneSpot.value = data
-                    showSpot.value = oneSpot.value
-                    for (let i = 0; i < showSpot.value.length; i++) {
-                        if (JSON.stringify(showSpot.value[i].Picture) === '{}') {
-                            showSpot.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                    for (let i = 0; i < data.length; i++) {
+                        if (JSON.stringify(data[i].Picture) === '{}') {
+                            data[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
                         }
                     }
+                    oneSpot.value = data
+                    showSpot.value = oneSpot.value
                 })
         }
 
@@ -330,13 +334,14 @@ export default {
             fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant')
                 .then(res => res.json())
                 .then(data => {
-                    allFood.value = data
-                    showFood.value = allFood.value
-                    for (let i = 0; i < showFood.value.length; i++) {
-                        if (JSON.stringify(showFood.value[i].Picture) === '{}') {
-                            showFood.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                    for (let i = 0; i < data.length; i++) {
+                        if (JSON.stringify(data[i].Picture) === '{}') {
+                            data[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
                         }
                     }
+                    allFood.value = data
+                    showFood.value = allFood.value
+                    store.dispatch('saveallfood', allFood.value)
                 })
         }
         //指定地點餐飲景點
@@ -344,13 +349,13 @@ export default {
             fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${selectCountry}`)
                 .then(res => res.json())
                 .then(data => {
-                    oneFood.value = data
-                    showFood.value = oneFood.value
-                    for (let i = 0; i < showFood.value.length; i++) {
-                        if (JSON.stringify(showFood.value[i].Picture) === '{}') {
-                            showFood.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                    for (let i = 0; i < data.length; i++) {
+                        if (JSON.stringify(data[i].Picture) === '{}') {
+                            data[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
                         }
                     }
+                    oneFood.value = data
+                    showFood.value = oneFood.value
                 })
         }
 
@@ -359,13 +364,14 @@ export default {
             fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel')
                 .then(res => res.json())
                 .then(data => {
-                    allHotel.value = data
-                    showHotel.value = allHotel.value
-                    for (let i = 0; i < showHotel.value.length; i++) {
-                        if (JSON.stringify(showHotel.value[i].Picture) === '{}') {
-                            showHotel.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                    for (let i = 0; i < data.length; i++) {
+                        if (JSON.stringify(data[i].Picture) === '{}') {
+                            data[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
                         }
                     }
+                    allHotel.value = data
+                    showHotel.value = allHotel.value
+                    store.dispatch('saveallhotel', allHotel.value)
                 })
         }
         //指定地點住宿景點
@@ -373,13 +379,43 @@ export default {
             fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${selectCountry}`)
                 .then(res => res.json())
                 .then(data => {
-                    oneHotel.value = data
-                    showHotel.value = oneHotel.value
-                    for (let i = 0; i < showHotel.value.length; i++) {
-                        if (JSON.stringify(showHotel.value[i].Picture) === '{}') {
-                            showHotel.value[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                    for (let i = 0; i < data.length; i++) {
+                        if (JSON.stringify(data[i].Picture) === '{}') {
+                            data[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
                         }
                     }
+                    oneHotel.value = data
+                    showHotel.value = oneHotel.value
+                })
+        }
+
+        //所有觀光活動資料
+        function fetchAllActivity() {
+            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity')
+                .then(res => res.json())
+                .then(data => {
+                    for (let i = 0; i < data.length; i++) {
+                        if (JSON.stringify(data[i].Picture) === '{}') {
+                            data[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                        }
+                    }
+                    allActivity.value = data
+                    showActivity.value = allActivity.value
+                    store.dispatch('saveallactivity', allActivity.value)
+                })
+        }
+        //指定地點活動
+        function fetchOneActivity(selectCountry:string) {
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${selectCountry}`)
+                .then(res => res.json())
+                .then(data => {
+                    for (let i = 0; i < data.length; i++) {
+                        if (JSON.stringify(data[i].Picture) === '{}') {
+                            data[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
+                        }
+                    }
+                    oneActivity.value = data
+                    showActivity.value = oneActivity.value
                 })
         }
 
@@ -402,6 +438,7 @@ export default {
             fetchAllSpot();
             fetchAllFood();
             fetchAllHotel();
+            fetchAllActivity();
         })
 
 
@@ -419,11 +456,15 @@ export default {
             showFood,
             allHotel,
             oneHotel,
+            allActivity,
+            oneActivity,
             showHotel,
+            showActivity,
             showCountry,
             fetchOneSpot,
             fetchOneFood,
-            fetchOneHotel
+            fetchOneHotel,
+            fetchOneActivity
         }
     }
 }
