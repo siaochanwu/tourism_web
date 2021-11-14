@@ -3,10 +3,9 @@
         <Nav />
         <div></div>
         <h1>111</h1>
-        <div class="flex flex-col md:flex-row-reverse ">
-            <div class="w-full md:w-6/12 mt-10 rounded-3xl bg-no-repeat bg-center bg-cover" :style="{ backgroundImage: `url(${showData.Picture.PictureUrl1})`}"></div>
-
-            <div class="container w-full md:w-6/12">
+        <div class="flex flex-col md:flex-row-reverse">
+            <div class="w-10/12 mx-auto h-80 md:h-auto md:w-6/12 mt-10 rounded-3xl bg-no-repeat bg-center bg-cover" :style="{ backgroundImage: `url(${showData.Picture.PictureUrl1})`}"></div>
+            <div class="w-full md:w-6/12">
                 <h1 class="mt-10 text-left mx-10 text-3xl font-bold">{{ showData.Name }}</h1>
                 <div class="flex flex-col md:grid-cols-6 grid-cols-12">
                     <div class="flex justify-center">
@@ -21,18 +20,17 @@
                         </div>
                         <div class="col-start-4 col-end-12 p-4 rounded-xl mt-5 mr-auto w-8/12 text-left">
                             <h3 class="font-semibold">景點資訊</h3>
-                            <p class="leading-tight text-justify w-full my-3">{{ showData.TravelInfo }}</p>
-                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-phone-alt mr-3"></i>{{ showData.Phone }}</p>
-                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-clock mr-3"></i>{{ showData.OpenTime }}</p>
-                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-map mr-3"></i>{{ showData.Address }}</p>
+                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-car mr-3 text-2xl"></i>{{ showData.TravelInfo }}</p>
+                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-phone-alt mr-3 text-2xl"></i>{{ showData.Phone }}</p>
+                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-clock mr-3 text-2xl"></i>{{ showData.OpenTime }}</p>
+                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-map mr-3 text-2xl"></i>{{ showData.Address }}</p>
                             <h3 class="font-semibold mb-0">景點介紹</h3>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
-  
+        <div class="w-10/12 mx-auto my-10 text-left">{{ showData.DescriptionDetail }}</div>
     </div>
 </template>
 

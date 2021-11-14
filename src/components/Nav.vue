@@ -1,9 +1,9 @@
 <template>
-    <div class="container mx-auto p-5 bg-blue-300 bg-opacity-20">
+    <div class="container mx-auto p-5 bg-blue-300 bg-opacity-20 md:bg-opacity-100">
         <nav class="md:flex md:justify-between">
             <div class="flex justify-between">
-                <a href="#" class="text-white font-bold text-2xl" @click="changeType('')">Formosa</a>
-                <p id="hamburgerbtn" class="md:hidden text-white" @click="toggleMenu"><i class="fas fa-bars text-2xl"></i></p>
+                <a href="#" class="font-bold text-2xl md:text-white" @click="changeType('')">Formosa</a>
+                <p id="hamburgerbtn" class="md:hidden md:text-white" @click="toggleMenu"><i class="fas fa-bars text-2xl"></i></p>
             </div>
             <ul class="hidden md:flex md:flex-row" id="mobileMenu">
                 <li class="pr-5 text-white font-bold" @click="changeType('旅遊景點')"><a href="#">旅遊景點</a></li>
