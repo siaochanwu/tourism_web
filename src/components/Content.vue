@@ -2,14 +2,15 @@
     <div class="container mx-auto">
         <Nav />
         <div></div>
-        <h1></h1>
+        <h1>111</h1>
         <div class="flex flex-col md:flex-row-reverse ">
-            <div class="w-full md:w-6/12 mt-10"><img src="" alt="">www</div>
+            <div class="w-full md:w-6/12 mt-10 rounded-3xl bg-no-repeat bg-center bg-cover" :style="{ backgroundImage: `url(${showData.Picture.PictureUrl1})`}"></div>
 
             <div class="container w-full md:w-6/12">
+                <h1 class="mt-10 text-left mx-10 text-3xl font-bold">{{ showData.Name }}</h1>
                 <div class="flex flex-col md:grid-cols-6 grid-cols-12">
                     <div class="flex justify-center">
-                        <div class="col-start-2 col-end-4 mr-5 mt-10 ml-5 relative">
+                        <div class="col-start-2 col-end-4 mr-5 mt-5 ml-5 relative">
                             <div class="w-6 h-6 absolute top-10 -mt-10 rounded-full bg-green-500 shadow text-center">
                             </div>
                             <div class="h-full w-6 flex items-center justify-center">
@@ -18,19 +19,13 @@
                             <div class="w-6 h-6 absolute bottom-0 mt-5 rounded-full bg-green-500 shadow text-center">
                             </div>
                         </div>
-                        <div class="col-start-4 col-end-12 p-4 rounded-xl mt-10 mr-auto w-8/12 text-left">
-                            <h3 class="font-semibold text-lg mb-1">景點資訊</h3>
-                            <p class="leading-tight text-justify w-full">
-                            21 July 2021, 04:30 PM
-                            </p>
-                            <p>111</p>
-                            <p>111</p>
-                            <p>111</p>
-                            <p>111</p>
-                            <p>111</p>
-                            <p>111</p>
-                            <p>111</p>
-                            <p>111</p>
+                        <div class="col-start-4 col-end-12 p-4 rounded-xl mt-5 mr-auto w-8/12 text-left">
+                            <h3 class="font-semibold">景點資訊</h3>
+                            <p class="leading-tight text-justify w-full my-3">{{ showData.TravelInfo }}</p>
+                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-phone-alt mr-3"></i>{{ showData.Phone }}</p>
+                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-clock mr-3"></i>{{ showData.OpenTime }}</p>
+                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-map mr-3"></i>{{ showData.Address }}</p>
+                            <h3 class="font-semibold mb-0">景點介紹</h3>
                         </div>
                     </div>
                 </div>
@@ -65,7 +60,7 @@ export default {
         const id = ref<any>(route.params.ID)
         const allSpotData = ref<thing[]>(store.state.allSpotData)
         const showData = ref({})
-        const oneSpot = ref<thing[]>([])
+        const oneSpot = ref<any>([])
 
         async function findSelectData(id:string) {
             console.log(id)
@@ -77,7 +72,13 @@ export default {
                         }
                     })
                 } else {
-                    await fetchOneSpot(store.state.selectCountry)
+                    oneSpot.value = await fetchOneSpot(store.state.selectCountry)
+                    console.log(oneSpot.value)
+                    await oneSpot.value.forEach(item => {
+                        if (item.ID == id) {
+                            showData.value = item
+                        }
+                    })
                     await console.log(showData.value)
 
                 }
@@ -95,13 +96,8 @@ export default {
                                 data[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
                             }
                         }
-                        oneSpot.value = data
-                        oneSpot.value.forEach(item => {
-                            if (item.ID == id) {
-                                showData.value = item
-                            }
-                        })
-                        resolve(showData.value)
+                        console.log(data)
+                        resolve(data)
                     })
                     .catch(err => {
                         reject()

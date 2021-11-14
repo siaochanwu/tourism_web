@@ -20,11 +20,13 @@
         <div>
             <h1 class="font-mono text-4xl font-bold mt-8">旅遊景點</h1>
             <div class="flex flex-col md:flex-row md:justify-between">
-                <div class="my-5 mx-auto w-10/12 md:w-2/12 h-24" v-for="item in showSpot" :key="item.ID">
-                    <div class="flex justify-center items-center w-8/12 md:w-10/12 mx-auto h-full relative" style="background-image: url(`${item.Picture.PictureUrl}`)">
-                        <div class="mask bg-black absolute bg-opacity-50 top-0 bottom-0 left-0 right-0 w-full h-full"></div>
-                        <p class="font-mono text-white text-4xl font-bold top-0 left-0 right-0 bottom-0 mt-5 z-10">{{ item.Name }}</p>
-                    </div>
+                <div class="my-5 mx-auto w-10/12 md:w-2/12 h-28" v-for="item in showSpot.slice(0,6)" :key="item.ID">
+                    <router-link :to="`/content/${item.ID}`">
+                        <div class="flex justify-center items-center w-8/12 md:w-10/12 mx-auto h-full relative bg-no-repeat bg-center bg-cover" :style="{ backgroundImage: `url(${item.Picture.PictureUrl1})`}">
+                            <div class="mask bg-black absolute bg-opacity-50 top-0 bottom-0 left-0 right-0 w-full h-full"></div>
+                            <p class="font-mono text-white text-2xl font-bold top-0 left-0 right-0 bottom-0 mt-5 z-10">{{ item.Name }}</p>
+                        </div>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -35,25 +37,27 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="p-10" v-for="item in showActivity.slice(0,3)" :key="item.ID">
-                    <div class="rounded overflow-hidden shadow-lg">
-                        <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
-                        <div class="px-6 py-4 text-left">
-                            <div class="font-bold text-xl mb-2">{{item.Name}}</div>
-                            <p class="text-gray-700 text-base">
-                                <i class="fas fa-map-marker-alt"></i>
-                                {{ item.Address }}
-                            </p>
-                            <p class="text-gray-700 text-base">
-                                <i class="fas fa-clock"></i>
-                                {{ item.OpenTime }}
-                            </p>
+                    <router-link :to="`/content/${item.ID}`">
+                        <div class="rounded overflow-hidden shadow-lg">
+                            <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
+                            <div class="px-6 py-4 text-left">
+                                <div class="font-bold text-xl mb-2">{{item.Name}}</div>
+                                <p class="text-gray-700 text-base">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ item.Address }}
+                                </p>
+                                <p class="text-gray-700 text-base">
+                                    <i class="fas fa-clock"></i>
+                                    {{ item.OpenTime }}
+                                </p>
+                            </div>
+                            <div class="px-6 pt-4 pb-2">
+                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                            </div>
                         </div>
-                        <div class="px-6 pt-4 pb-2">
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                        </div>
-                    </div>
+                    </router-link>
                 </div>
                 <button class="bg-yellow-500 text-white py-1 px-3 rounded-full text-1xl md:hidden w-3/12 m-auto">查看更多</button>
             </div>
@@ -63,23 +67,24 @@
                 <h1 class="font-mono text-4xl font-bold mt-8">美食品嘗</h1>
                 <button class="bg-yellow-500 text-white py-1 px-3 rounded-full absolute top-0 right-10 text-2xl hidden md:block">查看更多</button>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="p-10" v-for="item in showFood.slice(0,3)" :key="item.ID">
-                    <div class="rounded overflow-hidden shadow-lg">
-                        <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
-                        <div class="px-6 py-4 text-left">
-                            <div class="font-bold text-xl mb-2">{{item.Name}}</div>
-                            <p class="text-gray-700 text-base">
-                                <i class="fas fa-map-marker-alt"></i>
-                                {{ item.Address }}
-                            </p>
-                            <p class="text-gray-700 text-base">
-                                <i class="fas fa-clock"></i>
-                                {{ item.OpenTime }}
-                            </p>
+                    <router-link :to="`/content/${item.ID}`">
+                        <div class="rounded overflow-hidden shadow-lg">
+                            <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
+                            <div class="px-6 py-4 text-left">
+                                <div class="font-bold text-xl mb-2">{{item.Name}}</div>
+                                <p class="text-gray-700 text-base">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ item.Address }}
+                                </p>
+                                <p class="text-gray-700 text-base">
+                                    <i class="fas fa-clock"></i>
+                                    {{ item.OpenTime }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
                 <button class="bg-yellow-500 text-white py-1 px-3 rounded-full text-1xl md:hidden w-3/12 m-auto">查看更多</button>
             </div>
@@ -89,28 +94,29 @@
                 <h1 class="font-mono text-4xl font-bold mt-8">住宿推薦</h1>
                 <button class="bg-yellow-500 text-white py-1 px-3 rounded-full absolute top-0 right-10 text-2xl hidden md:block">查看更多</button>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="p-10" v-for="item in showHotel.slice(0,3)" :key="item.ID">
-                    <div class="rounded overflow-hidden shadow-lg">
-                        <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
-                        <div class="px-6 py-4 text-left">
-                            <div class="font-bold text-xl mb-2">{{item.Name}}</div>
-                            <p class="text-gray-700 text-base">
-                                <i class="fas fa-map-marker-alt"></i>
-                                {{ item.Address }}
-                            </p>
-                            <p class="text-gray-700 text-base">
-                                <i class="fas fa-clock"></i>
-                                {{ item.OpenTime }}
-                            </p>
+                    <router-link :to="`/content/${item.ID}`">
+                        <div class="rounded overflow-hidden shadow-lg">
+                            <img class="w-full" :src="item.Picture.PictureUrl1" :alt="item.Picture.PictureDescription1">
+                            <div class="px-6 py-4 text-left">
+                                <div class="font-bold text-xl mb-2">{{item.Name}}</div>
+                                <p class="text-gray-700 text-base">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ item.Address }}
+                                </p>
+                                <p class="text-gray-700 text-base">
+                                    <i class="fas fa-clock"></i>
+                                    {{ item.OpenTime }}
+                                </p>
+                            </div>
+                            <div class="px-6 pt-4 pb-2">
+                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                            </div>
                         </div>
-                        <div class="px-6 pt-4 pb-2">
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                        </div>
-                    </div>
+                    </router-link>
                 </div>
                 <button class="bg-yellow-500 text-white py-1 px-3 rounded-full text-1xl md:hidden m-auto w-3/12">查看更多</button>
             </div>
@@ -396,9 +402,9 @@ export default {
 
         //所有觀光景點資料
         function fetchAllSpot() {
-            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?&format=JSON',
+            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?&format=JSON&top=30',
             {
-                headers: getAuthorizationHeader()
+                // headers: getAuthorizationHeader()
             })
                 .then(res => res.json())
                 .then(data => {
@@ -414,7 +420,7 @@ export default {
         }
         //指定地點觀光景點
         function fetchOneSpot(selectCountry:string) {
-            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}?&format=JSON`,
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}?&format=JSON&top=30`,
             {
                 headers: getAuthorizationHeader()
             })
@@ -555,9 +561,9 @@ export default {
 
         onMounted(() => {
             fetchAllSpot();
-            fetchAllFood();
-            fetchAllHotel();
-            fetchAllActivity();
+            // fetchAllFood();
+            // fetchAllHotel();
+            // fetchAllActivity();
         })
 
 
