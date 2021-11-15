@@ -39,6 +39,7 @@ import Nav from './Nav.vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { ref, onMounted } from 'vue'
+import jsSHA from "jssha"
 
 export default {
     components: {
@@ -50,15 +51,16 @@ export default {
             Name:string,
             Picture:any,
             Address:string,
-            OpenTime: string
+            OpenTime: string,
+            DescriptionDetail: string
         }
 
         const route = useRoute()
         const store = useStore()
         const id = ref<any>(route.params.ID)
         const allSpotData = ref<thing[]>(store.state.allSpotData)
-        const showData = ref({})
-        const oneSpot = ref<any>([])
+        const showData = ref<any>({})
+        const oneSpot = ref([])
 
         async function findSelectData(id:string) {
             console.log(id)
@@ -82,11 +84,27 @@ export default {
                 }
             }
         }
+
+        //憑證
+        function getAuthorizationHeader() {
+            let AppID = import.meta.env.VITE_APP_ID;
+            let AppKey = import.meta.env.VITE_APP_KEY;
+            let GMTString = new Date().toGMTString();
+            let ShaObj = new jsSHA('SHA-1', 'TEXT');
+            ShaObj.setHMACKey(AppKey, 'TEXT');
+            ShaObj.update('x-date: ' + GMTString);
+            let HMAC = ShaObj.getHMAC('B64');
+            console.log('hmac', HMAC)
+            let Authorization = 'hmac username=\"' + AppID + '\", algorithm=\"hmac-sha1\", headers=\"x-date\", signature=\"' + HMAC + '\"';
+            return { 'Authorization': Authorization, 'X-Date': GMTString }; 
+        }
         
         //指定地點觀光景點
         function fetchOneSpot(selectCountry:string) {
             return new Promise((resolve, reject) => {
-                fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}`)
+                fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}?&format=JSON&top=30`, {
+                    headers: getAuthorizationHeader()
+                })
                     .then(res => res.json())
                     .then(data => {
                         for (let i = 0; i < data.length; i++) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto p-5 bg-blue-300 bg-opacity-20 md:bg-opacity-100">
+    <div class="container mx-auto p-5 bg-blue-300 bg-opacity-20">
         <nav class="md:flex md:justify-between">
             <div class="flex justify-between">
                 <a href="#" class="font-bold text-2xl md:text-white" @click="changeType('')">Formosa</a>

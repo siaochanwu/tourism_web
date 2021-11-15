@@ -260,6 +260,7 @@ import Nav from './Nav.vue'
 import { ref, onMounted, watch } from 'vue'
 import store from '../store'
 import { useStore } from 'vuex'
+import jsSHA from "jssha"
 
 export default {
     components:{
@@ -387,10 +388,9 @@ export default {
 
         //憑證
         function getAuthorizationHeader() {
-        //  填入自己 ID、KEY 開始
-            let AppID = 'FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF';
-            let AppKey = 'FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF';
-        //  填入自己 ID、KEY 結束
+            let AppID = import.meta.env.VITE_APP_ID;
+            let AppKey = import.meta.env.VITE_APP_KEY;
+
             let GMTString = new Date().toGMTString();
             let ShaObj = new jsSHA('SHA-1', 'TEXT');
             ShaObj.setHMACKey(AppKey, 'TEXT');
@@ -404,7 +404,7 @@ export default {
         function fetchAllSpot() {
             fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?&format=JSON&top=30',
             {
-                // headers: getAuthorizationHeader()
+                headers: getAuthorizationHeader()
             })
                 .then(res => res.json())
                 .then(data => {
@@ -561,9 +561,9 @@ export default {
 
         onMounted(() => {
             fetchAllSpot();
-            // fetchAllFood();
-            // fetchAllHotel();
-            // fetchAllActivity();
+            fetchAllFood();
+            fetchAllHotel();
+            fetchAllActivity();
         })
 
 
