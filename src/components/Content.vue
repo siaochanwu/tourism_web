@@ -4,7 +4,7 @@
         <div></div>
         <h1>111</h1>
         <div class="flex flex-col md:flex-row-reverse">
-            <div class="w-10/12 mx-auto h-80 md:h-auto md:w-6/12 mt-10 rounded-3xl bg-no-repeat bg-center bg-cover" :style="{ backgroundImage: `url(${showData.Picture.PictureUrl1})`}"></div>
+            <img :src="image" class="w-10/12 mx-auto h-80 md:h-auto md:w-6/12 mt-10 rounded-3xl bg-no-repeat bg-center bg-cover">
             <div class="w-full md:w-6/12">
                 <h1 class="mt-10 text-left mx-10 text-3xl font-bold">{{ showData.Name }}</h1>
                 <div class="flex flex-col md:grid-cols-6 grid-cols-12">
@@ -61,6 +61,7 @@ export default {
         const allSpotData = ref<thing[]>(store.state.allSpotData)
         const showData = ref<any>({})
         const oneSpot = ref([])
+        const image = ref('')
 
         async function findSelectData(id:string) {
             console.log(id)
@@ -69,6 +70,8 @@ export default {
                     allSpotData.value.forEach(item => {
                         if (item.ID == id) {
                             showData.value = item
+                            image.value = item.Picture.PictureUrl1
+                            console.log('1', image.value)
                         }
                     })
                 } else {
@@ -77,6 +80,8 @@ export default {
                     await oneSpot.value.forEach(item => {
                         if (item.ID == id) {
                             showData.value = item
+                            image.value = item.Picture.PictureUrl1
+                            console.log('1', image.value)
                         }
                     })
                     await console.log(showData.value)
@@ -89,7 +94,7 @@ export default {
         function getAuthorizationHeader() {
             let AppID = import.meta.env.VITE_APP_ID;
             let AppKey = import.meta.env.VITE_APP_KEY;
-            let GMTString = new Date().toGMTString();
+            let GMTString = new Date().toUTCString();
             let ShaObj = new jsSHA('SHA-1', 'TEXT');
             ShaObj.setHMACKey(AppKey, 'TEXT');
             ShaObj.update('x-date: ' + GMTString);
@@ -130,7 +135,8 @@ export default {
             id,
             allSpotData,
             showData,
-            oneSpot
+            oneSpot,
+            image
         }
     }
 }
