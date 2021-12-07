@@ -20,7 +20,7 @@
                         id="country"
                         class="bg-white p-2 rounded-md mt-5 md:w-5/12 w-full"
                         v-model="selectCountry"
-                        @change="fetchOneSpot(selectCountry)"
+                        @change="type(selectCountry)"
                     >
                         <option value>不分區域</option>
                         <option
@@ -361,18 +361,13 @@
 </template>
 
 
-<script lang="ts">
+<script lang="ts" setup>
 import Nav from './Nav.vue'
 import { ref, onMounted, watch } from 'vue'
-import store from '../store'
+// import store from '../store'
 import { useStore } from 'vuex'
 import jsSHA from "jssha"
 
-export default {
-    components: {
-        Nav,
-    },
-    setup() {
         interface thing {
             ID: string,
             Name: string,
@@ -650,6 +645,18 @@ export default {
                 })
         }
 
+        function type(selectCountry: string) {
+            if (selectType.value == '旅遊景點') {
+                fetchOneSpot(selectCountry)
+            } else if (selectType.value == '觀光活動') {
+                fetchOneActivity(selectCountry)
+            } else if (selectType.value == '美食品嘗') {
+                fetchOneFood(selectCountry)
+            } else if (selectType.value == '住宿推薦') {
+                fetchOneHotel(selectCountry)
+            }
+        }
+
         watch(selectCountry, (newVal, oldVal) => {
             allCountry.value.filter(item => {
                 if (selectCountry.value == item.value) {
@@ -672,31 +679,4 @@ export default {
             fetchAllActivity();
         })
 
-
-
-        return {
-            allCountry,
-            allType,
-            allSpot,
-            oneSpot,
-            selectCountry,
-            selectType,
-            showSpot,
-            allFood,
-            oneFood,
-            showFood,
-            allHotel,
-            oneHotel,
-            allActivity,
-            oneActivity,
-            showHotel,
-            showActivity,
-            showCountry,
-            fetchOneSpot,
-            fetchOneFood,
-            fetchOneHotel,
-            fetchOneActivity
-        }
-    }
-}
 </script>

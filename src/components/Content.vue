@@ -2,7 +2,6 @@
     <div class="container mx-auto">
         <Nav />
         <div></div>
-        <h1>111</h1>
         <div class="flex flex-col md:flex-row-reverse">
             <img :src="image" class="w-10/12 mx-auto h-80 md:h-auto md:w-6/12 mt-10 rounded-3xl bg-no-repeat bg-center bg-cover">
             <div class="w-full md:w-6/12">
@@ -34,18 +33,14 @@
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import Nav from './Nav.vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { ref, onMounted } from 'vue'
-import jsSHA from "jssha"
 
-export default {
-    components: {
-        Nav
-    },
-    setup() {
+import fetchOneCountry from '../use/fetchOneCountry'
+
         interface thing {
             ID:string,
             Name:string,
@@ -59,9 +54,14 @@ export default {
         const store = useStore()
         const id = ref<any>(route.params.ID)
         const allSpotData = ref<thing[]>(store.state.allSpotData)
+        const allFoodData = ref<thing[]>(store.state.allFoodData)
+        const allHotelData = ref<thing[]>(store.state.allHotelData)
+        const allActivityData = ref<thing[]>(store.state.allActivityData)
         const showData = ref<any>({})
-        const oneSpot = ref([])
+        // const oneSpot = ref([])
         const image = ref('')
+
+        const { oneSpot, oneFood, oneHotel, oneActivity } =fetchOneCountry(store.state.selectCountry)
 
         async function findSelectData(id:string) {
             console.log(id)
@@ -75,69 +75,46 @@ export default {
                         }
                     })
                 } else {
-                    oneSpot.value = await fetchOneSpot(store.state.selectCountry)
-                    console.log(oneSpot.value)
-                    await oneSpot.value.forEach(item => {
+                    image.value = oneSpot.Picture.PictureUrl1
+                }
+            } else if(store.state.selectType == '觀光活動'){
+                if (store.state.selectCountry == '') {
+                    allActivityData.value.forEach(item => {
                         if (item.ID == id) {
                             showData.value = item
                             image.value = item.Picture.PictureUrl1
-                            console.log('1', image.value)
                         }
                     })
-                    await console.log(showData.value)
-
+                } else {
+                    image.value = oneActivity.value.Picture.PictureUrl1
+                }
+            } else if(store.state.selectType == '美食品嘗'){
+                if (store.state.selectCountry == '') {
+                    allFoodData.value.forEach(item => {
+                        if (item.ID == id) {
+                            showData.value = item
+                            image.value = item.Picture.PictureUrl1
+                        }
+                    })
+                } else {
+                    image.value = oneFood.Picture.PictureUrl1
+                }
+            } else if(store.state.selectType == '住宿推薦'){
+                if (store.state.selectCountry == '') {
+                    allHotelData.value.forEach(item => {
+                        if (item.ID == id) {
+                            showData.value = item
+                            image.value = item.Picture.PictureUrl1
+                        }
+                    })
+                } else {
+                    image.value = oneHotel.Picture.PictureUrl1
                 }
             }
-        }
-
-        //憑證
-        function getAuthorizationHeader() {
-            let AppID = import.meta.env.VITE_APP_ID;
-            let AppKey = import.meta.env.VITE_APP_KEY;
-            let GMTString = new Date().toUTCString();
-            let ShaObj = new jsSHA('SHA-1', 'TEXT');
-            ShaObj.setHMACKey(AppKey, 'TEXT');
-            ShaObj.update('x-date: ' + GMTString);
-            let HMAC = ShaObj.getHMAC('B64');
-            console.log('hmac', HMAC)
-            let Authorization = 'hmac username=\"' + AppID + '\", algorithm=\"hmac-sha1\", headers=\"x-date\", signature=\"' + HMAC + '\"';
-            return { 'Authorization': Authorization, 'X-Date': GMTString }; 
-        }
-        
-        //指定地點觀光景點
-        function fetchOneSpot(selectCountry:string) {
-            return new Promise((resolve, reject) => {
-                fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}?&format=JSON&top=30`, {
-                    headers: getAuthorizationHeader()
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        for (let i = 0; i < data.length; i++) {
-                            if (JSON.stringify(data[i].Picture) === '{}') {
-                                data[i].Picture.PictureUrl1 = "https://angelofshiva.com/resources/assets/images/no-img.jpg"
-                            }
-                        }
-                        console.log(data)
-                        resolve(data)
-                    })
-                    .catch(err => {
-                        reject()
-                    })
-            }) 
-            
         }
 
         onMounted(() => {
             findSelectData(id.value)
         })
 
-        return {
-            id,
-            allSpotData,
-            showData,
-            oneSpot,
-            image
-        }
-    }
-}
 </script>

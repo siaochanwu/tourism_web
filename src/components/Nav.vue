@@ -6,9 +6,9 @@
                 <p id="hamburgerbtn" class="md:hidden md:text-white" @click="toggleMenu"><i class="fas fa-bars text-2xl"></i></p>
             </div>
             <ul class="hidden md:flex md:flex-row" id="mobileMenu">
-                <li class="pr-5 text-white font-bold" @click="changeType('旅遊景點')"><a href="#">旅遊景點</a></li>
-                <li class="pr-5 text-white font-bold" @click="changeType('住宿推薦')"><a href="#">推薦住宿</a></li>
-                <li class="pr-5 text-white font-bold" @click="changeType('美食品嘗')"><a href="#">美食饗宴</a></li>
+                <li class="pr-5 md:text-white font-bold" @click="changeType('旅遊景點')"><a href="#">旅遊景點</a></li>
+                <li class="pr-5 md:text-white font-bold" @click="changeType('住宿推薦')"><a href="#">推薦住宿</a></li>
+                <li class="pr-5 md:text-white font-bold" @click="changeType('美食品嘗')"><a href="#">美食饗宴</a></li>
             </ul>
         </nav>
     </div>
