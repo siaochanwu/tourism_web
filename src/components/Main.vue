@@ -503,7 +503,7 @@ import jsSHA from "jssha"
 
         //所有觀光景點資料
         function fetchAllSpot() {
-            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?&format=JSON&top=30',
+            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?&format=JSON&top=20',
                 {
                     headers: getAuthorizationHeader()
                 })
@@ -521,7 +521,7 @@ import jsSHA from "jssha"
         }
         //指定地點觀光景點
         function fetchOneSpot(selectCountry: string) {
-            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}?&format=JSON&top=30`,
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}?&format=JSON&top=20`,
                 {
                     headers: getAuthorizationHeader()
                 })
@@ -539,7 +539,7 @@ import jsSHA from "jssha"
 
         //所有觀光餐飲資料
         function fetchAllFood() {
-            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?&format=JSON',
+            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?&format=JSON&top=20',
                 {
                     headers: getAuthorizationHeader()
                 })
@@ -557,7 +557,7 @@ import jsSHA from "jssha"
         }
         //指定地點餐飲景點
         function fetchOneFood(selectCountry: string) {
-            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${selectCountry}?&format=JSON`,
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${selectCountry}?&format=JSON&top=20`,
                 {
                     headers: getAuthorizationHeader()
                 })
@@ -575,7 +575,7 @@ import jsSHA from "jssha"
 
         //所有觀光住宿資料
         function fetchAllHotel() {
-            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel?&format=JSON',
+            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel?&format=JSON&top=20',
                 {
                     headers: getAuthorizationHeader()
                 })
@@ -593,7 +593,7 @@ import jsSHA from "jssha"
         }
         //指定地點住宿景點
         function fetchOneHotel(selectCountry: string) {
-            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${selectCountry}?&format=JSON`,
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${selectCountry}?&format=JSON&top=20`,
                 {
                     headers: getAuthorizationHeader()
                 })
@@ -611,7 +611,7 @@ import jsSHA from "jssha"
 
         //所有觀光活動資料
         function fetchAllActivity() {
-            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?&format=JSON',
+            fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?&format=JSON&top=20',
                 {
                     headers: getAuthorizationHeader()
                 })
@@ -629,7 +629,7 @@ import jsSHA from "jssha"
         }
         //指定地點活動
         function fetchOneActivity(selectCountry: string) {
-            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${selectCountry}?&format=JSON`,
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${selectCountry}?&format=JSON&top=20`,
                 {
                     headers: getAuthorizationHeader()
                 })

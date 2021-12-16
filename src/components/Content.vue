@@ -18,18 +18,91 @@
                             </div>
                         </div>
                         <div class="col-start-4 col-end-12 p-4 rounded-xl mt-5 mr-auto w-8/12 text-left">
-                            <h3 class="font-semibold">景點資訊</h3>
-                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-car mr-3 text-2xl"></i>{{ showData.TravelInfo }}</p>
+                            <h3 v-if="store.state.selectType == '旅遊景點'" class="font-semibold md:text-2xl">景點資訊</h3>
+                            <h3 v-else-if="store.state.selectType == '觀光活動'" class="font-semibold md:text-2xl">活動資訊</h3>
+                            <h3 v-else-if="store.state.selectType == '美食品嘗'" class="font-semibold md:text-2xl">店家資訊</h3>
+                            <h3 v-else class="font-semibold md:text-2xl">住宿資訊</h3>
+                            <p v-if="store.state.selectType == '旅遊景點'" class="leading-tight text-justify w-full my-3"><i class="fas fa-car mr-3 text-2xl"></i>{{ showData.TravelInfo }}</p>
                             <p class="leading-tight text-justify w-full my-3"><i class="fas fa-phone-alt mr-3 text-2xl"></i>{{ showData.Phone }}</p>
-                            <p class="leading-tight text-justify w-full my-3"><i class="fas fa-clock mr-3 text-2xl"></i>{{ showData.OpenTime }}</p>
+                            <p v-if="store.state.selectType == '旅遊景點'" class="leading-tight text-justify w-full my-3"><i class="fas fa-clock mr-3 text-2xl"></i>{{ showData.OpenTime }}</p>
                             <p class="leading-tight text-justify w-full my-3"><i class="fas fa-map mr-3 text-2xl"></i>{{ showData.Address }}</p>
-                            <h3 class="font-semibold mb-0">景點介紹</h3>
+                            <h3 v-if="store.state.selectType == '旅遊景點'" class="font-semibold mb-0 md:text-2xl">景點介紹</h3>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="w-10/12 mx-auto my-10 text-left">{{ showData.DescriptionDetail }}</div>
+
+        <div class="mt-5">
+            <div>
+                <h1 class="font-mono text-4xl font-bold mt-8">附近景點</h1>
+                <div class="flex flex-col md:flex-row md:justify-between">
+                    <div
+                        class="my-5 mx-auto w-10/12 md:w-3/12 h-28"
+                        v-for="item in oneSpot.slice(0, 6)"
+                        :key="item.ID"
+                    >
+                        <router-link :to="`/content/${item.ID}`">
+                            <div
+                                class="flex justify-center items-center w-8/12 md:w-10/12 mx-auto h-full relative bg-no-repeat bg-center bg-cover"
+                                :style="{ backgroundImage: `url(${item.Picture.PictureUrl1})` }"
+                            >
+                            </div>
+                                <p
+                                    class="font-mono font-bold mt-2"
+                                >{{ item.Name }}</p>
+                        </router-link>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h1 class="font-mono text-4xl font-bold mt-8">附近美食</h1>
+                <div class="flex flex-col md:flex-row md:justify-between">
+                    <div
+                        class="my-5 mx-auto w-10/12 md:w-3/12 h-28"
+                        v-for="item in oneFood.slice(0, 6)"
+                        :key="item.ID"
+                    >
+                        <router-link :to="`/content/${item.ID}`">
+                            <div
+                                class="flex justify-center items-center w-8/12 md:w-10/12 mx-auto h-full relative bg-no-repeat bg-center bg-cover"
+                                :style="{ backgroundImage: `url(${item.Picture.PictureUrl1})` }"
+                            >
+                            </div>
+                                <p
+                                    class="font-mono font-bold mt-2"
+                                >{{ item.Name }}</p>
+                        </router-link>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h1 class="font-mono text-4xl font-bold mt-8">附近住宿</h1>
+                <div class="flex flex-col md:flex-row md:justify-between">
+                    <div
+                        class="my-5 mx-auto w-10/12 md:w-2/12 h-28"
+                        v-for="item in oneHotel.slice(0, 6)"
+                        :key="item.ID"
+                    >
+                        <router-link :to="`/content/${item.ID}`">
+                            <div
+                                class="flex justify-center items-center w-8/12 md:w-10/12 mx-auto h-full relative bg-no-repeat bg-center bg-cover"
+                                :style="{ backgroundImage: `url(${item.Picture.PictureUrl1})` }"
+                            >
+                                <div
+                                    class="mask bg-black absolute bg-opacity-50 top-0 bottom-0 left-0 right-0 w-full h-full"
+                                ></div>
+                                <p
+                                    class="font-mono text-white text-2xl font-bold top-0 left-0 right-0 bottom-0 mt-5 z-10"
+                                >{{ item.Name }}</p>
+                            </div>
+                        </router-link>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -58,7 +131,6 @@ import fetchOneCountry from '../use/fetchOneCountry'
         const allHotelData = ref<thing[]>(store.state.allHotelData)
         const allActivityData = ref<thing[]>(store.state.allActivityData)
         const showData = ref<any>({})
-        // const oneSpot = ref([])
         const image = ref('')
 
         const { oneSpot, oneFood, oneHotel, oneActivity } =fetchOneCountry(store.state.selectCountry)
