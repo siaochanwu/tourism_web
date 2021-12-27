@@ -367,6 +367,7 @@ import { ref, onMounted, watch } from 'vue'
 // import store from '../store'
 import { useStore } from 'vuex'
 import jsSHA from "jssha"
+import country from '../use/country'
 
         interface thing {
             ID: string,
@@ -378,98 +379,7 @@ import jsSHA from "jssha"
 
         const store = useStore()
 
-        const allCountry = ref([{
-            name: "臺北市",
-            value: "Taipei"
-        },
-        {
-            name: "新北市",
-            value: "NewTaipei"
-        },
-        {
-            name: "基隆市",
-            value: "Keelung"
-        },
-        {
-            name: "桃園市",
-            value: "Taoyuan"
-        },
-        {
-            name: "新竹市",
-            value: "Hsinchu"
-        },
-        {
-            name: "新竹縣",
-            value: "HsinchuCounty"
-        },
-        {
-            name: "苗栗縣",
-            value: "MiaoliCounty"
-        },
-        {
-            name: "彰化縣",
-            value: "ChanghuaCounty"
-        },
-        {
-            name: "南投縣",
-            value: "NantouCounty"
-        },
-        {
-            name: "雲林縣",
-            value: "YunlinCounty"
-        },
-        {
-            name: "嘉義市",
-            value: "Chiayi"
-        },
-        {
-            name: "嘉義縣",
-            value: "ChiayiCounty"
-        },
-        {
-            name: "臺中市",
-            value: "Taichung"
-        },
-        {
-            name: "臺南市",
-            value: "Tainan"
-        },
-        {
-            name: "高雄市",
-            value: "Kaohsiung"
-        },
-        {
-            name: "屏東縣",
-            value: "PingtungCounty"
-        },
-        {
-            name: "宜蘭縣",
-            value: "YilanCounty"
-        },
-        {
-            name: "花蓮縣",
-            value: "HualienCounty"
-        },
-        {
-            name: "臺東縣",
-            value: "TaitungCounty"
-        },
-        {
-            name: "澎湖縣",
-            value: "PenghuCounty"
-        },
-        {
-            name: "金門縣",
-            value: "KinmenCounty"
-        },
-        {
-            name: "連江縣",
-            value: "LienchiangCounty"
-        }])
-        const allType = ref(["旅遊景點",
-            "觀光活動",
-            "美食品嘗",
-            "住宿推薦"])
+        const { allCountry, allType } = country()
         const oneSpot = ref<thing[]>([])
         const showSpot = ref([])
         const oneFood = ref<thing[]>([])
@@ -479,7 +389,6 @@ import jsSHA from "jssha"
         const oneActivity = ref<thing[]>([])
         const showActivity = ref([])
         const showCountry = ref("全部")
-
         const selectCountry = ref("")
         const selectType = ref("")
 
@@ -514,8 +423,7 @@ import jsSHA from "jssha"
                     showSpot.value = oneSpot.value
                 })
         }
-
-        
+  
         //指定地點餐飲景點
         function fetchOneFood(selectCountry: string) {
             fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${selectCountry}?&$format=JSON&$top=20`,
@@ -534,7 +442,6 @@ import jsSHA from "jssha"
                 })
         }
 
-        
         //指定地點住宿景點
         function fetchOneHotel(selectCountry: string) {
             fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${selectCountry}?&$format=JSON&$top=20`,
@@ -553,7 +460,6 @@ import jsSHA from "jssha"
                 })
         }
 
-        
         //指定地點活動
         function fetchOneActivity(selectCountry: string) {
             fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${selectCountry}?&$format=JSON&$top=20`,
