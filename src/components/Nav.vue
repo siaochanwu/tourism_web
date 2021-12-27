@@ -15,14 +15,14 @@
 </template>
 
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useStore } from 'vuex';
 import Store from '../store'
 
 const store = useStore()
 
-export default {
-    setup() {
+// export default {
+    // setup() {
 
         function toggleMenu() {
             document.getElementById('mobileMenu')!.classList.toggle('active')
@@ -32,12 +32,12 @@ export default {
             Store.dispatch('selecttype', type)
         }
 
-        return {
-            changeType,
-            toggleMenu
-        }
-    }
-}
+    //     return {
+    //         changeType,
+    //         toggleMenu
+    //     }
+    // }
+// }
     
 </script>
 

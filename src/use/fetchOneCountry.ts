@@ -24,7 +24,7 @@ export default function fetchOneCountry(selectCountry) {
     //指定地點觀光景點
     function fetchOneSpot(selectCountry:string) {
         return new Promise((resolve, reject) => {
-            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}?&format=JSON&top=20`, {
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${selectCountry}?&$format=JSON&$top=20`, {
                 headers: getAuthorizationHeader()
             })
                 .then(res => res.json())
@@ -52,7 +52,7 @@ export default function fetchOneCountry(selectCountry) {
 
     function fetchOneFood(selectCountry: string) {
         return new Promise((resolve, reject) => {
-            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${selectCountry}?&format=JSON&top=20`,
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${selectCountry}?&$format=JSON&$top=20`,
             {
                 headers: getAuthorizationHeader()
             })
@@ -78,7 +78,7 @@ export default function fetchOneCountry(selectCountry) {
 
     function fetchOneHotel(selectCountry: string) {
         return new Promise((resolve, reject) => {
-            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${selectCountry}?&format=JSON&top=20`,
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${selectCountry}?&$format=JSON&$top=20`,
                 {
                     headers: getAuthorizationHeader()
                 })
@@ -102,7 +102,7 @@ export default function fetchOneCountry(selectCountry) {
 
     function fetchOneActivity(selectCountry: string) {
         return new Promise ((resolve, reject) => {
-            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${selectCountry}?&format=JSON&top=20`,
+            fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${selectCountry}?&$format=JSON&$top=20`,
             {
                 headers: getAuthorizationHeader()
             })
