@@ -363,8 +363,7 @@
 
 <script lang="ts" setup>
 import Nav from './Nav.vue'
-import { ref, onMounted, watch } from 'vue'
-// import store from '../store'
+import { ref, onMounted, watch, computed } from 'vue'
 import { useStore } from 'vuex'
 import jsSHA from "jssha"
 import country from '../use/country'
@@ -391,6 +390,7 @@ import country from '../use/country'
         const showCountry = ref("全部")
         const selectCountry = ref("")
         const selectType = ref("")
+
 
         //憑證
         function getAuthorizationHeader() {
@@ -495,13 +495,19 @@ import country from '../use/country'
                 if (selectCountry.value == item.value) {
                     showCountry.value = item.name;
                     store.dispatch("selectcountry", selectCountry.value)
-                    console.log(store.state.selectType)
                 }
             })
         })
         watch(selectType, (newVal, oldVal) => {
             store.dispatch("selecttype", selectType.value)
-            console.log(store.state.selectType)
+        })
+
+        const navSelect = computed(() => selectType.value = store.state.selectType)
+
+        watch(navSelect, (newVal, oldVal) => {
+            selectType.value = newVal
+
+
         })
 
 

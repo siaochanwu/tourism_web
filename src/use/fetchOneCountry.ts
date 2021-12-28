@@ -120,8 +120,6 @@ export default function fetchOneCountry(selectCountry) {
         
     }
 
-
-
     onMounted(getSpot)
     onMounted(getFood)
     onMounted(getHotel)

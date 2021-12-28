@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto p-5 bg-blue-300 bg-opacity-20">
-        <nav class="md:flex md:justify-between">
+        <nav class="md:flex md:justify-between relative w-full">
             <div class="flex justify-between">
                 <a href="#" class="font-bold text-2xl " @click="changeType('')">Formosa</a>
                 <p id="hamburgerbtn" class="md:hidden md:text-white" @click="toggleMenu"><i class="fas fa-bars text-2xl"></i></p>
@@ -17,27 +17,16 @@
 
 <script lang="ts" setup>
 import { useStore } from 'vuex';
-import Store from '../store'
 
 const store = useStore()
 
-// export default {
-    // setup() {
+function toggleMenu() {
+    document.getElementById('mobileMenu')!.classList.toggle('active')
+}
 
-        function toggleMenu() {
-            document.getElementById('mobileMenu')!.classList.toggle('active')
-        }
-
-        function changeType(type:string) {
-            Store.dispatch('selecttype', type)
-        }
-
-    //     return {
-    //         changeType,
-    //         toggleMenu
-    //     }
-    // }
-// }
+function changeType(type:string) {
+    store.dispatch('selecttype', type)
+}
     
 </script>
 

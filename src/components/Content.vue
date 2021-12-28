@@ -36,11 +36,11 @@
 
         <div class="mt-5">
             <div>
-                <h1 class="font-mono text-4xl font-bold mt-8">附近景點</h1>
+                <h1 class="font-mono text-3xl font-bold mt-8">附近景點</h1>
                 <div class="flex flex-col md:flex-row md:justify-between">
                     <div
                         class="my-5 mx-auto w-10/12 md:w-3/12 h-28"
-                        v-for="item in oneSpot.slice(0, 6)"
+                        v-for="item in oneSpot.slice(0, 4)"
                         :key="item.ID"
                     >
                         <router-link :to="`/content/${item.ID}`">
@@ -51,20 +51,20 @@
                             </div>
                                 <p
                                     class="font-mono font-bold mt-2"
-                                >{{ item.Name }}</p>
+                                >{{ item.ScenicSpotName }}</p>
                         </router-link>
                     </div>
                 </div>
             </div>
             <div>
-                <h1 class="font-mono text-4xl font-bold mt-8">附近美食</h1>
+                <h1 class="font-mono text-3xl font-bold mt-8">附近美食</h1>
                 <div class="flex flex-col md:flex-row md:justify-between">
                     <div
                         class="my-5 mx-auto w-10/12 md:w-3/12 h-28"
-                        v-for="item in oneFood.slice(0, 6)"
+                        v-for="item in oneFood.slice(0, 4)"
                         :key="item.ID"
                     >
-                        <router-link :to="`/content/${item.ID}`">
+                        <router-link :to="`${item.RestaurantID}`">
                             <div
                                 class="flex justify-center items-center w-8/12 md:w-10/12 mx-auto h-full relative bg-no-repeat bg-center bg-cover"
                                 :style="{ backgroundImage: `url(${item.Picture.PictureUrl1})` }"
@@ -72,18 +72,18 @@
                             </div>
                                 <p
                                     class="font-mono font-bold mt-2"
-                                >{{ item.Name }}</p>
+                                >{{ item.RestaurantName }}</p>
                         </router-link>
                     </div>
                 </div>
             </div>
 
-            <div>
-                <h1 class="font-mono text-4xl font-bold mt-8">附近住宿</h1>
+            <!-- <div>
+                <h1 class="font-mono text-3xl font-bold mt-8">附近住宿</h1>
                 <div class="flex flex-col md:flex-row md:justify-between">
                     <div
-                        class="my-5 mx-auto w-10/12 md:w-2/12 h-28"
-                        v-for="item in oneHotel.slice(0, 6)"
+                        class="my-5 mx-auto w-10/12 md:w-3/12 h-28"
+                        v-for="item in oneHotel.slice(0, 4)"
                         :key="item.ID"
                     >
                         <router-link :to="`/content/${item.ID}`">
@@ -91,17 +91,14 @@
                                 class="flex justify-center items-center w-8/12 md:w-10/12 mx-auto h-full relative bg-no-repeat bg-center bg-cover"
                                 :style="{ backgroundImage: `url(${item.Picture.PictureUrl1})` }"
                             >
-                                <div
-                                    class="mask bg-black absolute bg-opacity-50 top-0 bottom-0 left-0 right-0 w-full h-full"
-                                ></div>
-                                <p
-                                    class="font-mono text-white text-2xl font-bold top-0 left-0 right-0 bottom-0 mt-5 z-10"
-                                >{{ item.Name }}</p>
                             </div>
+                                <p
+                                    class="font-mono font-bold mt-2"
+                                >{{ item.HotelName }}</p>
                         </router-link>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -123,6 +120,7 @@ import fetchOneCountry from '../use/fetchOneCountry'
             DescriptionDetail: string
         }
 
+
         const route = useRoute()
         const store = useStore()
         const id = ref<any>(route.params.ID)
@@ -143,7 +141,6 @@ import fetchOneCountry from '../use/fetchOneCountry'
                         if (item.ID == id) {
                             showData.value = item
                             image.value = item.Picture.PictureUrl1
-                            console.log('1', image.value)
                         }
                     })
                 } else {
@@ -182,8 +179,39 @@ import fetchOneCountry from '../use/fetchOneCountry'
                 } else {
                     image.value = oneHotel.Picture.PictureUrl1
                 }
+            } else {
+                if (store.state.selectCountry == '') {
+                    allSpotData.value.forEach(item => {
+                        if (item.ID == id) {
+                            showData.value = item
+                            image.value = item.Picture.PictureUrl1
+                            console.log('1', image.value)
+                        }
+                    })
+                    allActivityData.value.forEach(item => {
+                        if (item.ID == id) {
+                            showData.value = item
+                            image.value = item.Picture.PictureUrl1
+                        }
+                    })
+                    allHotelData.value.forEach(item => {
+                        if (item.ID == id) {
+                            showData.value = item
+                            image.value = item.Picture.PictureUrl1
+                        }
+                    })
+                    allFoodData.value.forEach(item => {
+                        if (item.ID == id) {
+                            showData.value = item
+                            image.value = item.Picture.PictureUrl1
+                        }
+                    })
+                } else {
+                    image.value = oneHotel.Picture.PictureUrl1
+                }
             }
         }
+
 
         onMounted(() => {
             findSelectData(id.value)
