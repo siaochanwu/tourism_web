@@ -39,9 +39,9 @@
                     <div
                         class="my-5 mx-auto w-10/12 md:w-2/12 h-28"
                         v-for="item in showSpot.slice(0, 6)"
-                        :key="item.ID"
+                        :key="item.ScenicSpotID"
                     >
-                        <router-link :to="`/content/${item.ID}`">
+                        <router-link :to="`/content/${item.ScenicSpotID}`">
                             <div
                                 class="flex justify-center items-center w-8/12 md:w-10/12 mx-auto h-full relative bg-no-repeat bg-center bg-cover"
                                 :style="{ backgroundImage: `url(${item.Picture.PictureUrl1})` }"
@@ -51,7 +51,7 @@
                                 ></div>
                                 <p
                                     class="font-mono text-white text-2xl font-bold top-0 left-0 right-0 bottom-0 mt-5 z-10"
-                                >{{ item.Name }}</p>
+                                >{{ item.ScenicSpotName }}</p>
                             </div>
                         </router-link>
                     </div>
@@ -65,8 +65,8 @@
                     >查看更多</button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3">
-                    <div class="p-10" v-for="item in showActivity.slice(0, 3)" :key="item.ID">
-                        <router-link :to="`/content/${item.ID}`">
+                    <div class="p-10" v-for="item in showActivity.slice(0, 3)" :key="item.ActivityID">
+                        <router-link :to="`/content/${item.ActivityID}`">
                             <div class="rounded overflow-hidden shadow-lg">
                                 <img
                                     class="w-full"
@@ -74,26 +74,20 @@
                                     :alt="item.Picture.PictureDescription1"
                                 />
                                 <div class="px-6 py-4 text-left">
-                                    <div class="font-bold text-xl mb-2">{{ item.Name }}</div>
+                                    <div class="font-bold text-xl mb-2">{{ item.ActivityName }}</div>
                                     <p class="text-gray-700 text-base">
                                         <i class="fas fa-map-marker-alt"></i>
                                         {{ item.Address }}
                                     </p>
                                     <p class="text-gray-700 text-base">
                                         <i class="fas fa-clock"></i>
-                                        {{ item.OpenTime }}
+                                        {{ item.StartTime.split('T')[0] }}
                                     </p>
                                 </div>
                                 <div class="px-6 pt-4 pb-2">
                                     <span
                                         class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                                    >#photography</span>
-                                    <span
-                                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                                    >#travel</span>
-                                    <span
-                                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                                    >#winter</span>
+                                    >#{{ item.Class1 }}</span>
                                 </div>
                             </div>
                         </router-link>
@@ -111,8 +105,8 @@
                     >查看更多</button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3">
-                    <div class="p-10" v-for="item in showFood.slice(0, 3)" :key="item.ID">
-                        <router-link :to="`/content/${item.ID}`">
+                    <div class="p-10" v-for="item in showFood.slice(0, 3)" :key="item.RestaurantID">
+                        <router-link :to="`/content/${item.RestaurantID}`">
                             <div class="rounded overflow-hidden shadow-lg">
                                 <img
                                     class="w-full"
@@ -120,7 +114,7 @@
                                     :alt="item.Picture.PictureDescription1"
                                 />
                                 <div class="px-6 py-4 text-left">
-                                    <div class="font-bold text-xl mb-2">{{ item.Name }}</div>
+                                    <div class="font-bold text-xl mb-2">{{ item.RestaurantName }}</div>
                                     <p class="text-gray-700 text-base">
                                         <i class="fas fa-map-marker-alt"></i>
                                         {{ item.Address }}
@@ -129,6 +123,11 @@
                                         <i class="fas fa-clock"></i>
                                         {{ item.OpenTime }}
                                     </p>
+                                </div>
+                                <div class="px-6 pt-4 pb-2">
+                                    <span
+                                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                                    >#{{ item.Class }}</span>
                                 </div>
                             </div>
                         </router-link>
@@ -146,8 +145,8 @@
                     >查看更多</button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3">
-                    <div class="p-10" v-for="item in showHotel.slice(0, 3)" :key="item.ID">
-                        <router-link :to="`/content/${item.ID}`">
+                    <div class="p-10" v-for="item in showHotel.slice(0, 3)" :key="item.HotelID">
+                        <router-link :to="`/content/${item.HotelID}`">
                             <div class="rounded overflow-hidden shadow-lg">
                                 <img
                                     class="w-full"
@@ -155,26 +154,16 @@
                                     :alt="item.Picture.PictureDescription1"
                                 />
                                 <div class="px-6 py-4 text-left">
-                                    <div class="font-bold text-xl mb-2">{{ item.Name }}</div>
+                                    <div class="font-bold text-xl mb-2">{{ item.HotelName }}</div>
                                     <p class="text-gray-700 text-base">
                                         <i class="fas fa-map-marker-alt"></i>
                                         {{ item.Address }}
-                                    </p>
-                                    <p class="text-gray-700 text-base">
-                                        <i class="fas fa-clock"></i>
-                                        {{ item.OpenTime }}
                                     </p>
                                 </div>
                                 <div class="px-6 pt-4 pb-2">
                                     <span
                                         class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                                    >#photography</span>
-                                    <span
-                                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                                    >#travel</span>
-                                    <span
-                                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                                    >#winter</span>
+                                    >#{{ item.Class }}</span>
                                 </div>
                             </div>
                         </router-link>
@@ -201,8 +190,8 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3">
-                <div class="p-5" v-for="item in showSpot" :key="item.ID">
-                    <router-link :to="`/content/${item.ID}`">
+                <div class="p-5" v-for="item in showSpot" :key="item.ScenicSpotID">
+                    <router-link :to="`/content/${item.ScenicSpotID}`">
                         <div class="rounded overflow-hidden shadow-lg">
                             <img
                                 class="w-full"
@@ -210,7 +199,7 @@
                                 :alt="item.Picture.PictureDescription1"
                             />
                             <div class="px-6 py-4 text-left">
-                                <div class="font-bold text-xl mb-2">{{ item.Name }}</div>
+                                <div class="font-bold text-xl mb-2">{{ item.ScenicSpotName }}</div>
                                 <p class="text-gray-700 text-base">
                                     <i class="fas fa-map-marker-alt"></i>
                                     {{ item.Address }}
@@ -244,8 +233,8 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3">
-                <div class="p-5" v-for="item in showFood" :key="item.ID">
-                    <router-link :to="`/content/${item.ID}`">
+                <div class="p-5" v-for="item in showFood" :key="item.RestaurantID">
+                    <router-link :to="`/content/${item.RestaurantID}`">
                         <div class="rounded overflow-hidden shadow-lg">
                             <img
                                 class="w-full"
@@ -253,7 +242,7 @@
                                 :alt="item.Picture.PictureDescription1"
                             />
                             <div class="px-6 py-4 text-left">
-                                <div class="font-bold text-xl mb-2">{{ item.Name }}</div>
+                                <div class="font-bold text-xl mb-2">{{ item.RestaurantName }}</div>
                                 <p class="text-gray-700 text-base">
                                     <i class="fas fa-map-marker-alt"></i>
                                     {{ item.Address }}
@@ -287,8 +276,8 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3">
-                <div class="p-5" v-for="item in showHotel" :key="item.ID">
-                    <router-link :to="`/content/${item.ID}`">
+                <div class="p-5" v-for="item in showHotel" :key="item.HotelID">
+                    <router-link :to="`/content/${item.HotelID}`">
                         <div class="rounded overflow-hidden shadow-lg">
                             <img
                                 class="w-full"
@@ -296,14 +285,10 @@
                                 :alt="item.Picture.PictureDescription1"
                             />
                             <div class="px-6 py-4 text-left">
-                                <div class="font-bold text-xl mb-2">{{ item.Name }}</div>
+                                <div class="font-bold text-xl mb-2">{{ item.HotelName }}</div>
                                 <p class="text-gray-700 text-base">
                                     <i class="fas fa-map-marker-alt"></i>
                                     {{ item.Address }}
-                                </p>
-                                <p class="text-gray-700 text-base">
-                                    <i class="fas fa-clock"></i>
-                                    {{ item.OpenTime }}
                                 </p>
                             </div>
                         </div>
@@ -330,8 +315,8 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3">
-                <div class="p-5" v-for="item in showActivity" :key="item.ID">
-                    <router-link :to="`/content/${item.ID}`">
+                <div class="p-5" v-for="item in showActivity" :key="item.ActivityID">
+                    <router-link :to="`/content/${item.ActivityID}`">
                         <div class="rounded overflow-hidden shadow-lg">
                             <img
                                 class="w-full"
@@ -339,14 +324,14 @@
                                 :alt="item.Picture.PictureDescription1"
                             />
                             <div class="px-6 py-4 text-left">
-                                <div class="font-bold text-xl mb-2">{{ item.Name }}</div>
+                                <div class="font-bold text-xl mb-2">{{ item.ActivityName }}</div>
                                 <p class="text-gray-700 text-base">
                                     <i class="fas fa-map-marker-alt"></i>
                                     {{ item.Address }}
                                 </p>
                                 <p class="text-gray-700 text-base">
                                     <i class="fas fa-clock"></i>
-                                    {{ item.OpenTime }}
+                                    {{ item.StartTime.split('T')[0] }}
                                 </p>
                             </div>
                         </div>

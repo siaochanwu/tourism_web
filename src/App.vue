@@ -20,7 +20,7 @@ function getAuthorizationHeader() {
     return { 'Authorization': Authorization, 'X-Date': GMTString };
 }
 function fetchAllSpot() {
-    fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?&$format=JSON&$top=20',
+    fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?&$format=JSON&$top=50',
         {
             headers: getAuthorizationHeader()
         })
@@ -37,7 +37,7 @@ function fetchAllSpot() {
 
 //所有觀光餐飲資料
 function fetchAllFood() {
-    fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?&$format=JSON&$top=20',
+    fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?&$format=JSON&$top=50',
         {
             headers: getAuthorizationHeader()
         })
@@ -54,7 +54,7 @@ function fetchAllFood() {
 
 //所有觀光住宿資料
 function fetchAllHotel() {
-    fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel?&$format=JSON&$top=20',
+    fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel?&$format=JSON&$top=50',
         {
             headers: getAuthorizationHeader()
         })
@@ -71,7 +71,7 @@ function fetchAllHotel() {
 
 //所有觀光活動資料
 function fetchAllActivity() {
-    fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?&$format=JSON&$top=20',
+    fetch('https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?&$format=JSON&$top=50',
         {
             headers: getAuthorizationHeader()
         })

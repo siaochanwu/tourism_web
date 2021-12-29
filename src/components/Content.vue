@@ -182,26 +182,35 @@ import fetchOneCountry from '../use/fetchOneCountry'
             } else {
                 if (store.state.selectCountry == '') {
                     allSpotData.value.forEach(item => {
-                        if (item.ID == id) {
+                        if (item.ScenicSpotID == id) {
+                            console.log('spot')
+                            store.dispatch('selecttype', "旅遊景點")
                             showData.value = item
                             image.value = item.Picture.PictureUrl1
                             console.log('1', image.value)
                         }
                     })
                     allActivityData.value.forEach(item => {
-                        if (item.ID == id) {
+                        if (item.ActivityID == id) {
+                            console.log('activity')
+                            store.dispatch('selecttype', "觀光活動")
                             showData.value = item
                             image.value = item.Picture.PictureUrl1
                         }
                     })
                     allHotelData.value.forEach(item => {
-                        if (item.ID == id) {
+                        if (item.HotelID == id) {
+                            console.log('hotel')
+                            store.dispatch('selecttype', "美食品嘗")
                             showData.value = item
                             image.value = item.Picture.PictureUrl1
+                            console.log('no')
                         }
                     })
                     allFoodData.value.forEach(item => {
-                        if (item.ID == id) {
+                        if (item.RestaurantID == id) {
+                            console.log('food')
+                            store.dispatch('selecttype', "住宿推薦")
                             showData.value = item
                             image.value = item.Picture.PictureUrl1
                         }
