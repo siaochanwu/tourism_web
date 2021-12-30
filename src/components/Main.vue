@@ -354,24 +354,36 @@ import jsSHA from "jssha"
 import country from '../use/country'
 
         interface thing {
-            ID: string,
-            Name: string,
-            Picture: any,
+            ScenicSpotID: string,
+            RestaurantID: string,
+            ScenicSpotName: string,
+            RestaurantName: string,
+            HotelID: string,
+            HotelName: string,
+            ActivityID: string,
+            ActivityName: string,
+            Picture: {
+                PictureUrl1:string,
+                PictureDescription1: string
+            },
             Address: string,
-            OpenTime: string
+            OpenTime: string,
+            Class: string,
+            StartTime: string,
+            Class1: string
         }
 
         const store = useStore()
 
         const { allCountry, allType } = country()
-        const oneSpot = ref<thing[]>([])
-        const showSpot = ref([])
-        const oneFood = ref<thing[]>([])
-        const showFood = ref([])
-        const oneHotel = ref<thing[]>([])
-        const showHotel = ref([])
-        const oneActivity = ref<thing[]>([])
-        const showActivity = ref([])
+        const oneSpot = ref([])
+        const showSpot = ref<thing[]>([])
+        const oneFood = ref([])
+        const showFood = ref<thing[]>([])
+        const oneHotel = ref([])
+        const showHotel = ref<thing[]>([])
+        const oneActivity = ref([])
+        const showActivity = ref<thing[]>([])
         const showCountry = ref("全部")
         const selectCountry = ref("")
         const selectType = ref("")

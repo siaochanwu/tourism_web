@@ -41,9 +41,9 @@
                     <div
                         class="my-5 mx-auto w-10/12 md:w-3/12 h-28"
                         v-for="item in oneSpot.slice(0, 4)"
-                        :key="item.ID"
+                        :key="item.ScenicSpotID"
                     >
-                        <router-link :to="`/content/${item.ID}`">
+                        <router-link :to="`${item.ScenicSpotID}`" @click="`id=${item.ScenicSpotID}`">
                             <div
                                 class="flex justify-center items-center w-8/12 md:w-10/12 mx-auto h-full relative bg-no-repeat bg-center bg-cover"
                                 :style="{ backgroundImage: `url(${item.Picture.PictureUrl1})` }"
@@ -62,7 +62,7 @@
                     <div
                         class="my-5 mx-auto w-10/12 md:w-3/12 h-28"
                         v-for="item in oneFood.slice(0, 4)"
-                        :key="item.ID"
+                        :key="item.RestaurantID"
                     >
                         <router-link :to="`${item.RestaurantID}`">
                             <div
@@ -107,38 +107,65 @@
 import Nav from './Nav.vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 import fetchOneCountry from '../use/fetchOneCountry'
 
-        interface thing {
-            ID:string,
-            Name:string,
-            Picture:any,
-            Address:string,
-            OpenTime: string,
-            DescriptionDetail: string
+        interface allspot {
+            ScenicSpotID: string,
+            ScenicSpotName: string,
+            Picture: {
+                PictureUrl1:string
+            },
+            Address: string,
+            OpenTime: string
+        }
+        interface allfood {
+            RestaurantID: string,
+            RestaurantName: string,
+            Picture: {
+                PictureUrl1:string
+            },
+            Address: string,
+            OpenTime: string
+        }
+        interface allhotel {
+            HotelID: string,
+            HotelName: string,
+            Picture: {
+                PictureUrl1:string
+            },
+            Address: string,
+        }
+        interface allactivity {
+            ActivityID: string,
+            ActivityName: string,
+            Picture: {
+                PictureUrl1:string
+            },
+            Address: string,
+            StartTime: string
         }
 
 
         const route = useRoute()
         const store = useStore()
         const id = ref<any>(route.params.ID)
-        const allSpotData = ref<thing[]>(store.state.allSpotData)
-        const allFoodData = ref<thing[]>(store.state.allFoodData)
-        const allHotelData = ref<thing[]>(store.state.allHotelData)
-        const allActivityData = ref<thing[]>(store.state.allActivityData)
+        const allSpotData = ref<allspot[]>(store.state.allSpotData)
+        const allFoodData = ref<allfood[]>(store.state.allFoodData)
+        const allHotelData = ref<allhotel[]>(store.state.allHotelData)
+        const allActivityData = ref<allactivity[]>(store.state.allActivityData)
         const showData = ref<any>({})
         const image = ref('')
 
         const { oneSpot, oneFood, oneHotel, oneActivity } =fetchOneCountry(store.state.selectCountry)
 
         async function findSelectData(id:string) {
-            console.log(id)
+            console.log(id, store.state.selectType)
             if (store.state.selectType == '旅遊景點') {
                 if (store.state.selectCountry == '') {
                     allSpotData.value.forEach(item => {
-                        if (item.ID == id) {
+                        if (item.ScenicSpotID == id) {
                             showData.value = item
                             image.value = item.Picture.PictureUrl1
                         }
@@ -149,18 +176,18 @@ import fetchOneCountry from '../use/fetchOneCountry'
             } else if(store.state.selectType == '觀光活動'){
                 if (store.state.selectCountry == '') {
                     allActivityData.value.forEach(item => {
-                        if (item.ID == id) {
+                        if (item.ActivityID == id) {
                             showData.value = item
                             image.value = item.Picture.PictureUrl1
                         }
                     })
                 } else {
-                    image.value = oneActivity.value.Picture.PictureUrl1
+                    image.value = oneActivity.Picture.PictureUrl1
                 }
             } else if(store.state.selectType == '美食品嘗'){
                 if (store.state.selectCountry == '') {
                     allFoodData.value.forEach(item => {
-                        if (item.ID == id) {
+                        if (item.RestaurantID == id) {
                             showData.value = item
                             image.value = item.Picture.PictureUrl1
                         }
@@ -171,7 +198,7 @@ import fetchOneCountry from '../use/fetchOneCountry'
             } else if(store.state.selectType == '住宿推薦'){
                 if (store.state.selectCountry == '') {
                     allHotelData.value.forEach(item => {
-                        if (item.ID == id) {
+                        if (item.HotelID == id) {
                             showData.value = item
                             image.value = item.Picture.PictureUrl1
                         }

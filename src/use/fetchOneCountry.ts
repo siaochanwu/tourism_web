@@ -1,5 +1,16 @@
 import { ref, onMounted } from 'vue'
 import jsSHA from "jssha"
+// interface data {
+//     ScenicSpotID: string,
+//     ScenicSpotName: string,
+//     RestaurantID: string,
+//     RestaurantName: string,
+//     Picture: {
+//         PictureUrl1:string
+//     },
+//     Address: string,
+//     OpenTime: string
+// }
 
 export default function fetchOneCountry(selectCountry) {
     const oneSpot = ref([])
