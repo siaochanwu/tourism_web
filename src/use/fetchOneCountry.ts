@@ -13,7 +13,7 @@ import jsSHA from "jssha"
 // }
 
 export default function fetchOneCountry(selectCountry) {
-    const oneSpot = ref([])
+    const oneSpot = ref<any>([])
 
     const getSpot = async () => {
         oneSpot.value = await fetchOneSpot(selectCountry)
@@ -55,7 +55,7 @@ export default function fetchOneCountry(selectCountry) {
         
     }
 
-    const oneFood = ref([])
+    const oneFood = ref<any>([])
 
     const getFood = async () => {
         oneFood.value = await fetchOneFood(selectCountry)
@@ -81,7 +81,7 @@ export default function fetchOneCountry(selectCountry) {
         
     }
 
-    const oneHotel = ref([])
+    const oneHotel = ref<any>([])
 
     const getHotel = async () => {
         oneHotel.value = await fetchOneHotel(selectCountry)
@@ -106,7 +106,7 @@ export default function fetchOneCountry(selectCountry) {
         })
     }
 
-    const oneActivity = ref([])
+    const oneActivity = ref<any>([])
     const getActivity = async () => {
         oneActivity.value = await fetchOneActivity(selectCountry)
     }
