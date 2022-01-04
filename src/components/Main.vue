@@ -10,6 +10,7 @@
                     type="text"
                     placeholder="搜尋關鍵字"
                     class="bg-white p-2 rounded-md w-10/12 md:w-5/12 m-auto mt-5"
+                    v-model="search"
                 />
                 <div class="flex flex-col md:flex-row md:w-5/12 w-10/12 m-auto md:justify-between">
                     <select id="type" class="bg-white p-2 rounded-md mt-5 md:w-5/12 w-full" v-model="selectType">
@@ -38,7 +39,7 @@
                 <div class="flex flex-col md:flex-row md:justify-between">
                     <div
                         class="my-5 mx-auto w-10/12 md:w-2/12 h-28"
-                        v-for="item in showSpot.slice(0, 6)"
+                        v-for="item in ShowSpot.slice(0, 6)"
                         :key="item.ScenicSpotID"
                     >
                         <router-link :to="`/content/${item.ScenicSpotID}`">
@@ -65,7 +66,7 @@
                     >查看更多</button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3">
-                    <div class="p-10" v-for="item in showActivity.slice(0, 3)" :key="item.ActivityID">
+                    <div class="p-10" v-for="item in ShowActivity.slice(0, 3)" :key="item.ActivityID">
                         <router-link :to="`/content/${item.ActivityID}`">
                             <div class="rounded overflow-hidden shadow-lg">
                                 <img
@@ -105,7 +106,7 @@
                     >查看更多</button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3">
-                    <div class="p-10" v-for="item in showFood.slice(0, 3)" :key="item.RestaurantID">
+                    <div class="p-10" v-for="item in ShowFood.slice(0, 3)" :key="item.RestaurantID">
                         <router-link :to="`/content/${item.RestaurantID}`">
                             <div class="rounded overflow-hidden shadow-lg">
                                 <img
@@ -145,7 +146,7 @@
                     >查看更多</button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3">
-                    <div class="p-10" v-for="item in showHotel.slice(0, 3)" :key="item.HotelID">
+                    <div class="p-10" v-for="item in ShowHotel.slice(0, 3)" :key="item.HotelID">
                         <router-link :to="`/content/${item.HotelID}`">
                             <div class="rounded overflow-hidden shadow-lg">
                                 <img
@@ -190,7 +191,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3">
-                <div class="p-5" v-for="item in showSpot" :key="item.ScenicSpotID">
+                <div class="p-5" v-for="item in ShowSpot" :key="item.ScenicSpotID">
                     <router-link :to="`/content/${item.ScenicSpotID}`">
                         <div class="rounded overflow-hidden shadow-lg">
                             <img
@@ -233,7 +234,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3">
-                <div class="p-5" v-for="item in showFood" :key="item.RestaurantID">
+                <div class="p-5" v-for="item in ShowFood" :key="item.RestaurantID">
                     <router-link :to="`/content/${item.RestaurantID}`">
                         <div class="rounded overflow-hidden shadow-lg">
                             <img
@@ -276,7 +277,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3">
-                <div class="p-5" v-for="item in showHotel" :key="item.HotelID">
+                <div class="p-5" v-for="item in ShowHotel" :key="item.HotelID">
                     <router-link :to="`/content/${item.HotelID}`">
                         <div class="rounded overflow-hidden shadow-lg">
                             <img
@@ -315,7 +316,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3">
-                <div class="p-5" v-for="item in showActivity" :key="item.ActivityID">
+                <div class="p-5" v-for="item in ShowActivity" :key="item.ActivityID">
                     <router-link :to="`/content/${item.ActivityID}`">
                         <div class="rounded overflow-hidden shadow-lg">
                             <img
@@ -387,6 +388,7 @@ import country from '../use/country'
         const showCountry = ref("全部")
         const selectCountry = ref("")
         const selectType = ref("")
+        const search = ref('')
 
 
         //憑證
@@ -513,6 +515,35 @@ import country from '../use/country'
             showFood.value = store.state.allFoodData;
             showHotel.value = store.state.allHotelData;
             showActivity.value = store.state.allActivityData;
+        })
+
+        const ShowSpot = computed(() => {
+            if (search.value !== '') {
+                return showSpot.value.filter(item => item.ScenicSpotName.match(search.value))
+            } else {
+                return showSpot.value
+            }
+        })
+        const ShowFood = computed(() => {
+            if (search.value !== '') {
+                return showFood.value.filter(item => item.RestaurantName.match(search.value))
+            } else {
+                return showFood.value
+            }
+        })
+        const ShowHotel = computed(() => {
+            if (search.value !== '') {
+                return showHotel.value.filter(item => item.HotelName.match(search.value))
+            } else {
+                return showHotel.value
+            }
+        })
+        const ShowActivity = computed(() => {
+            if (search.value !== '') {
+                return showActivity.value.filter(item => item.ActivityName.match(search.value))
+            } else {
+                return showActivity.value
+            }
         })
 
 </script>
